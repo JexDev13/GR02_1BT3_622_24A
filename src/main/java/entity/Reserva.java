@@ -13,7 +13,7 @@ public class Reserva {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cedula_cliente")
-    private Cliente cedulaCliente;
+    private int cedulaCliente;
 
     @Column(name = "numero_habitacion")
     private Integer numeroHabitacion;
@@ -35,11 +35,11 @@ public class Reserva {
         this.id = id;
     }
 
-    public Cliente getCedulaCliente() {
+    public int getCedulaCliente() {
         return cedulaCliente;
     }
 
-    public void setCedulaCliente(Cliente cedulaCliente) {
+    public void setCedulaCliente(int cedulaCliente) {
         this.cedulaCliente = cedulaCliente;
     }
 

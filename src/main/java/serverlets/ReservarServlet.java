@@ -1,8 +1,7 @@
 package serverlets;
 
-import web.Reseva;
-import entity.ConexionBD;
-import entity.Habitacione;
+import entity.Cliente;
+import entity.Reserva;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.persistence.EntityManager;
@@ -11,59 +10,65 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@WebServlet(name="ReservarServlet", urlPatterns = {"/index"})
+import entity.ConexionBD;
+
+
+@WebServlet(name="ReservarServlet", urlPatterns = {"/ReservarServlet"})
 public class ReservarServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("prueba");
         // Obtener los parámetros enviados desde el formulario HTML
+        String numeroHabitacion = req.getParameter("numeroHabitacion");
         String cedula = req.getParameter("cedula");
         String checkIn =req.getParameter("checkIn");
         String checkOut = req.getParameter("checkOut");
         String cantidadPersonas = req.getParameter("cantidadPersonas");
-        String numeroHabitacion = req.getParameter("numeroHabitacion");
 
-        // Crear una nueva reserva con los datos recibidos
-        Reseva reserva = new Reseva(cedula, numeroHabitacion, checkIn, checkOut, cantidadPersonas);
+        Reserva reserva = new Reserva();
+        reserva.setCedulaCliente(Integer.parseInt(cedula));
+        reserva.setNumeroHabitacion(Integer.parseInt(numeroHabitacion));
+        reserva.setDiaEntrada(LocalDate.parse(checkIn));
+        reserva.setDiaSalida(LocalDate.parse(checkOut));
+        reserva.setCantidadPersonas(Integer.parseInt(cantidadPersonas));
 
-        // Obtener el EntityManager y la transacción
-        EntityManager entityManager = ConexionBD.entityManager;
-        EntityTransaction transaction = entityManager.getTransaction();
+        System.out.println("prueba");
 
         try {
             // Iniciar la transacción
-            transaction.begin();
-
-            // Obtener la habitación correspondiente a partir del número de habitación
-            Habitacione habitacion = entityManager.find(Habitacione.class, numeroHabitacion);
-
-            // Asignar la habitación a la reserva
-            reserva.setNum_habitacion(numeroHabitacion);
+            ConexionBD.transaction.begin();
 
             // Guardar la reserva en la base de datos
-            entityManager.persist(reserva);
+            ConexionBD.entityManager.persist(reserva);
 
             // Confirmar la transacción
-            transaction.commit();
+            ConexionBD.transaction.commit();
 
-            // Redirigir a una página de éxito o mostrar un mensaje de éxito
-            resp.sendRedirect("index.jsp");
+            System.out.println("Exito");
+            // Redireccionar a una página de éxito
+            //resp.sendRedirect("exito.jsp");
         } catch (Exception e) {
-            // Si ocurre algún error, realizar un rollback de la transacción
-            if (transaction.isActive()) {
-                transaction.rollback();
+            // Manejar cualquier excepción
+            if (ConexionBD.transaction.isActive()) {
+                ConexionBD.transaction.rollback();
+                System.out.println("Exito if");
             }
             e.printStackTrace();
-            // Redirigir a una página de error o mostrar un mensaje de error
-            resp.sendRedirect("error.jsp");
+
+            // Redireccionar a una página de error
+           // resp.sendRedirect("error.jsp");
+            System.out.println("Fallo");
         } finally {
-            // Cerrar el EntityManager
-            entityManager.close();
+            // Cerrar la conexión
+            ConexionBD.endConnection();
         }
+
+
     }
 
 }

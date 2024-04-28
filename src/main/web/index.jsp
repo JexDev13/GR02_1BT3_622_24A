@@ -1,7 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
+<%@ page import="entity.Reserva" %><%--
+  Created by IntelliJ IDEA.
+  User: erick cabezas
+  Date: 11/11/2023
+  Time: 21:45
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel NewYork - Reservas</title>
     <link rel="stylesheet" href="./css/index.css"> <!-- Enlazar el archivo CSS externo -->
@@ -12,10 +18,12 @@
             var formulario = document.getElementById("formulario");
             var nombreHabitacionElemento = document.getElementById("nombreHabitacion");
             var numeroHabitacionElemento = document.getElementById("numeroHabitacion");
+            var numeroHabitacionInput = document.getElementById("numeroHabitacionInput");
 
             // Establecer el nombre y número de la habitación en los elementos correspondientes
             nombreHabitacionElemento.textContent = nombreHabitacion;
             numeroHabitacionElemento.textContent = numeroHabitacion;
+            numeroHabitacionInput.value = numeroHabitacion;
 
             // Mostrar el formulario
             formulario.style.display = "block";
@@ -73,9 +81,15 @@
     <div id="formulario" style="display: none;">
         <button id="cerrarFormulario" onclick="cerrarFormulario()">X</button>
         <h2>Reservar Habitacion</h2>
-        <p>Nombre de la habitacion: <span id="nombreHabitacion"></span></p>
-        <p>Numero de la habitación: <span id="numeroHabitacion"></span></p>
-        <form action="ReservarServlet" method="post"> <!-- Cambiado a ReservaServlet y método POST -->
+
+
+        <form action="ReservarServlet" method="POST"> <!-- Cambiado a ReservaServlet y método POST -->
+
+            <p>Nombre de la habitacion: <span id="nombreHabitacion"></span></p>
+            <p>Numero de la habitación: <span id="numeroHabitacion"></span></p>
+
+            <input type="hidden" id="numeroHabitacionInput" name="numeroHabitacion">
+
             <label for="cedula">Cedula:</label>
             <input type="text" id="cedula" name="cedula" required><br>
 
@@ -93,6 +107,7 @@
 
             <input type="submit" value="Reservar">
         </form>
+
     </div>
 
 
