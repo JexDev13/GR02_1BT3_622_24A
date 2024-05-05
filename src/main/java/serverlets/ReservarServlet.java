@@ -9,6 +9,7 @@ import entity.Reserva;
 //import jakarta.servlet.annotation.WebServlet;
 //import jakarta.persistence.EntityManager;
 //import jakarta.persistence.EntityTransaction;\
+import entity.ReservaDTO;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.persistence.*;
@@ -42,27 +43,25 @@ public class ReservarServlet extends HttpServlet {
         // Obtener los parámetros enviados desde el formulario HTML
         String numeroHabitacion = req.getParameter("numeroHabitacion");
         String cedula = req.getParameter("cedula");
-        String checkIn =req.getParameter("checkIn");
+        String checkIn = req.getParameter("checkIn");
         String checkOut = req.getParameter("checkOut");
         String cantidadPersonas = req.getParameter("cantidadPersonas");
 
-        reservar(cedula, numeroHabitacion, checkIn, checkOut, cantidadPersonas);
+        ReservaDTO reservaDTO = new ReservaDTO(
+            Integer.parseInt(cedula),
+            Integer.parseInt(numeroHabitacion),
+            checkIn,
+            checkOut,
+            Integer.parseInt(cantidadPersonas)
+        );
+
+        reservar(reservaDTO);
     }
 
     private void reservar(
-        String cedula,
-        String numeroHabitacion,
-        String checkIn,
-        String checkOut,
-        String cantidadPersonas
+        ReservaDTO reservaDTO
     ){
-        ReservarController reservarController = new ReservarController(
-                Integer.parseInt(cedula),
-                Integer.parseInt(numeroHabitacion),
-                checkIn,
-                checkOut,
-                Integer.parseInt(cantidadPersonas)
-        );
+        ReservarController reservarController = new ReservarController(reservaDTO);
 
         reservarController.reservar();
     }

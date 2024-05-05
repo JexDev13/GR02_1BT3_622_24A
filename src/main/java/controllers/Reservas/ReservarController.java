@@ -3,6 +3,7 @@ package controllers.Reservas;
 import entity.Cliente;
 import entity.ConexionBD;
 import entity.Reserva;
+import entity.ReservaDTO;
 import jakarta.persistence.EntityManager;
 import utils.PersistDatabase;
 
@@ -13,13 +14,15 @@ public class ReservarController {
     private Reserva reserva;
 
     public ReservarController(
-            int cedula,
-            int numeroHabitacion,
-            String checkIn,
-            String checkOut,
-            int cantidadPersonas
+            ReservaDTO reservaDTO
     ) {
-        reserva = createReserva(cedula, numeroHabitacion, checkIn, checkOut, cantidadPersonas);
+        reserva = createReserva(
+                reservaDTO.getCedula(),
+                reservaDTO.getNumeroHabitacion(),
+                reservaDTO.getCheckIn(),
+                reservaDTO.getCheckOut(),
+                reservaDTO.getCantidadPersonas()
+        );
     }
 
     public void reservar() {
