@@ -46,7 +46,16 @@ public class ReservarServlet extends HttpServlet {
         String checkOut = req.getParameter("checkOut");
         String cantidadPersonas = req.getParameter("cantidadPersonas");
 
-        // Crear una nueva instancia de ReservarController
+        reservar(cedula, numeroHabitacion, checkIn, checkOut, cantidadPersonas);
+    }
+
+    private void reservar(
+        String cedula,
+        String numeroHabitacion,
+        String checkIn,
+        String checkOut,
+        String cantidadPersonas
+    ){
         ReservarController reservarController = new ReservarController(
                 Integer.parseInt(cedula),
                 Integer.parseInt(numeroHabitacion),
