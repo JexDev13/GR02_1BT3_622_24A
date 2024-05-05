@@ -11,9 +11,8 @@ public class Reserva {
     @Column(name = "codigo", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cedula_cliente")
-    private int cedulaCliente;
+    @Column(name = "cedula_cliente")
+    private Integer cedulaCliente;
 
     @Column(name = "numero_habitacion")
     private Integer numeroHabitacion;
@@ -26,6 +25,7 @@ public class Reserva {
 
     @Column(name = "cantidad_personas")
     private Integer cantidadPersonas;
+
 
     public Integer getId() {
         return id;

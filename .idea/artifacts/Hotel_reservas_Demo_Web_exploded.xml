@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="Hotel_reservas_Demo:Web exploded">
+  <artifact type="war" build-on-make="true" name="Hotel_reservas_Demo:Web exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/Hotel_reservas_Demo_Web_exploded</output-path>
-    <root id="root">
+    <root id="archive" name="Hotel_reservas_Demo_Web exploded.war">
       <element id="javaee-facet-resources" facet="Hotel_reservas_Demo/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">

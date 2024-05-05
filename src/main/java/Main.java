@@ -12,57 +12,34 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        /*try {
-            ConexionBD.transaction.begin();
-
-            Cliente cliente = new Cliente();
-            cliente.setId(171010102);
-            cliente.setNombre("Samantha");
-            cliente.setApellidos("Arias");
-
-            ConexionBD.entityManager.persist(cliente);
-
-            ConexionBD.transaction.commit();
-        } finally {
-            if(ConexionBD.transaction.isActive()) {
-                ConexionBD.transaction.rollback();
-            }
-            ConexionBD.entityManager.close();
-            ConexionBD.entityManagerFactory.close();
-        }*/
 
         try {
-            EntityManager entityManager = ConexionBD.entityManager;
+//            EntityManager entityManager = ConexionBD.entityManager;
 
+//            ConexionBD conexionBD = new ConexionBD();
             // Iniciar una transacción
-            ConexionBD.transaction.begin();
+//            ConexionBD.transaction.begin();
 
-            // Ejecutar la consulta para obtener todas las habitaciones
-            List<Habitacione> habitaciones = entityManager.createQuery("SELECT h FROM Habitacione h", Habitacione.class).getResultList();
+            // Crear un nuevo objeto Cliente
+            Cliente cliente = new Cliente();
+            cliente.setId(192);
+            cliente.setNombre("Juan");
+            cliente.setApellidos("Perez");
 
-            // Imprimir las habitaciones obtenidas
-            for (Habitacione habitacion : habitaciones) {
-                System.out.println(habitacion.toString());
-            }
+//            entityManager.persist(cliente);
 
-            // Confirmar la transacción
-            ConexionBD.transaction.commit();
+//            ConexionBD.transaction.commit();
         } catch (Exception e) {
             // Manejar cualquier excepción
-            if (ConexionBD.transaction.isActive()) {
-                ConexionBD.transaction.rollback();
-            }
-            e.printStackTrace();
+//            if (ConexionBD.transaction.isActive()) {
+//                ConexionBD.transaction.rollback();
+//            }
+            System.out.println("ASJGDHJASHDJKU");
+            System.out.println("Error: " + e.getMessage());
+//            e.printStackTrace();
         } finally {
             // Cerrar el EntityManager
-            ConexionBD.endConnection();
+//            ConexionBD.endConnection();
         }
-
-
-
-
-
-
-
     }
 }
