@@ -19,18 +19,26 @@ public class ReservarController {
             String checkOut,
             int cantidadPersonas
     ) {
+        reserva = createReserva(cedula, numeroHabitacion, checkIn, checkOut, cantidadPersonas);
+        PersistDatabase persistence = new PersistDatabase();
+        persistence.persist(reserva);
+    }
+
+    public Reserva createReserva(
+            int cedula,
+            int numeroHabitacion,
+            String checkIn,
+            String checkOut,
+            int cantidadPersonas
+    ) {
         reserva = new Reserva();
-        reserva.setId(123456789);
         reserva.setCedulaCliente(cedula);
         reserva.setNumeroHabitacion(numeroHabitacion);
         reserva.setDiaEntrada(LocalDate.parse(checkIn));
         reserva.setDiaSalida(LocalDate.parse(checkOut));
         reserva.setCantidadPersonas(cantidadPersonas);
-    }
 
-    public void reservar() {
-        PersistDatabase persistence = new PersistDatabase();
-        persistence.persist(reserva);
+        return reserva;
     }
 
 }
