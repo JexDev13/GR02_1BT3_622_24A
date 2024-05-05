@@ -23,9 +23,6 @@ public class PersistDatabase {
         return transactionResult;
     }
 
-    private void createConection() {
-        ConexionBD.transaction.begin();
-    }
 
     private void rollbackTransaction() {
         if (ConexionBD.transaction.isActive()) {
@@ -34,12 +31,9 @@ public class PersistDatabase {
     }
 
     private void persistObject(Object object) {
-        createConection();
+        ConexionBD.transaction.begin();
         ConexionBD.entityManager.persist(object);
-        commitTransaction();
-    }
-
-    private void commitTransaction() {
         ConexionBD.transaction.commit();
     }
+
 }
