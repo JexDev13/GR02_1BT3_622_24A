@@ -11,9 +11,7 @@ public class PersistDatabase {
         int transactionResult;
 
         try {
-            createConection();
-            ConexionBD.entityManager.persist(object);
-            commitTransaction();
+            persistObject(object);
             transactionResult = 0;
         } catch (Exception e) {
             if (ConexionBD.transaction.isActive()) {
@@ -29,6 +27,11 @@ public class PersistDatabase {
 
     private void createConection() {
         ConexionBD.transaction.begin();
+    }
+    private void persistObject(Object object) {
+        createConection();
+        ConexionBD.entityManager.persist(object);
+        commitTransaction();
     }
 
     private void commitTransaction() {
