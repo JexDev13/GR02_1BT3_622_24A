@@ -20,6 +20,9 @@ public class ReservarController {
             int cantidadPersonas
     ) {
         reserva = createReserva(cedula, numeroHabitacion, checkIn, checkOut, cantidadPersonas);
+    }
+
+    public void reservar() {
         PersistDatabase persistence = new PersistDatabase();
         persistence.persist(reserva);
     }
