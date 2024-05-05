@@ -17,6 +17,23 @@ public class ReservaDTO {
         this.cantidadPersonas = cantidadPersonas;
     }
 
+    public Reserva createReserva(
+            int cedula,
+            int numeroHabitacion,
+            String checkIn,
+            String checkOut,
+            int cantidadPersonas
+    ) {
+        Reserva reserva = new Reserva();
+        reserva.setCedulaCliente(cedula);
+        reserva.setNumeroHabitacion(numeroHabitacion);
+        reserva.setDiaEntrada(LocalDate.parse(checkIn));
+        reserva.setDiaSalida(LocalDate.parse(checkOut));
+        reserva.setCantidadPersonas(cantidadPersonas);
+
+        return reserva;
+    }
+
     public int getCedula() {
         return cedula;
     }

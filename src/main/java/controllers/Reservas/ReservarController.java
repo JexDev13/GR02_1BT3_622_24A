@@ -10,13 +10,12 @@ import utils.PersistDatabase;
 import java.time.LocalDate;
 
 public class ReservarController {
-
-    private Reserva reserva;
+    private final Reserva reserva;
 
     public ReservarController(
             ReservaDTO reservaDTO
     ) {
-        reserva = createReserva(
+        reserva = reservaDTO.createReserva(
                 reservaDTO.getCedula(),
                 reservaDTO.getNumeroHabitacion(),
                 reservaDTO.getCheckIn(),
@@ -29,22 +28,4 @@ public class ReservarController {
         PersistDatabase persistence = new PersistDatabase();
         persistence.persist(reserva);
     }
-
-    public Reserva createReserva(
-            int cedula,
-            int numeroHabitacion,
-            String checkIn,
-            String checkOut,
-            int cantidadPersonas
-    ) {
-        reserva = new Reserva();
-        reserva.setCedulaCliente(cedula);
-        reserva.setNumeroHabitacion(numeroHabitacion);
-        reserva.setDiaEntrada(LocalDate.parse(checkIn));
-        reserva.setDiaSalida(LocalDate.parse(checkOut));
-        reserva.setCantidadPersonas(cantidadPersonas);
-
-        return reserva;
-    }
-
 }
