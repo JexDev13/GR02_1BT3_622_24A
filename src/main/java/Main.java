@@ -13,12 +13,15 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        try {
-//            EntityManager entityManager = ConexionBD.entityManager;
+        System.out.println("ASJGDHJASHDJKU");
 
-//            ConexionBD conexionBD = new ConexionBD();
-            // Iniciar una transacción
-//            ConexionBD.transaction.begin();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+
+            System.out.println("ASJGDHJASHDJKU");
 
             // Crear un nuevo objeto Cliente
             Cliente cliente = new Cliente();
@@ -26,20 +29,28 @@ public class Main {
             cliente.setNombre("Juan");
             cliente.setApellidos("Perez");
 
-//            entityManager.persist(cliente);
 
-//            ConexionBD.transaction.commit();
+
+            em.getTransaction().begin();
+
+            em.persist(cliente);
+
+            em.getTransaction().commit();
+
+
+
         } catch (Exception e) {
             // Manejar cualquier excepción
-//            if (ConexionBD.transaction.isActive()) {
-//                ConexionBD.transaction.rollback();
-//            }
+            //if (ConexionBD.transaction.isActive()) {
+            //    ConexionBD.transaction.rollback();
+            //}
             System.out.println("ASJGDHJASHDJKU");
             System.out.println("Error: " + e.getMessage());
-//            e.printStackTrace();
+            e.printStackTrace();
         } finally {
             // Cerrar el EntityManager
-//            ConexionBD.endConnection();
+            em.close();
+            emf.close();
         }
     }
 }
