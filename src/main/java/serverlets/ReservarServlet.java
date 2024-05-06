@@ -16,7 +16,7 @@ public class ReservarServlet extends HttpServlet {
     public void init() {
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         System.out.println("prueba");
         // Obtener los parámetros enviados desde el formulario HTML
         String numeroHabitacion = req.getParameter("numeroHabitacion");
