@@ -1,26 +1,11 @@
 package serverlets;
 
 import controllers.Reservas.ReservarController;
-import entity.Cliente;
-import entity.Reserva;
 
-//import jakarta.persistence.EntityManagerFactory;
-//import jakarta.persistence.Persistence;
-//import jakarta.servlet.annotation.WebServlet;
-//import jakarta.persistence.EntityManager;
-//import jakarta.persistence.EntityTransaction;\
 import entity.ReservaDTO;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
-import jakarta.persistence.*;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-
-import entity.ConexionBD;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -28,14 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name="reservarservlet", urlPatterns = {"/reservar-servlet"})
 public class ReservarServlet extends HttpServlet {
 
-    public EntityManagerFactory entityManagerFactory;
-    public EntityManager entityManager;
-    public EntityTransaction transaction;
-
     public void init() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("default");
-        entityManager = entityManagerFactory.createEntityManager();
-        transaction = entityManager.getTransaction();
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -62,7 +40,6 @@ public class ReservarServlet extends HttpServlet {
         ReservaDTO reservaDTO
     ){
         ReservarController reservarController = new ReservarController(reservaDTO);
-
         reservarController.reservar();
     }
 

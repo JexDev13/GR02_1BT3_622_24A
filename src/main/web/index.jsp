@@ -76,7 +76,7 @@
         <h2>Reservar Habitacion</h2>
 
 
-        <form action="ReservarServlet" method="POST"> <!-- Cambiado a ReservaServlet y método POST -->
+        <form action="reservar-servlet" method="POST"> <!-- Cambiado a ReservaServlet y método POST -->
 
             <p>Nombre de la habitacion: <span id="nombreHabitacion"></span></p>
             <p>Numero de la habitación: <span id="numeroHabitacion"></span></p>
