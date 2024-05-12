@@ -33,12 +33,12 @@ public class ReservarServlet extends HttpServlet {
         reservaService.registrarReserva(newReserva);
     }
 
-    protected Reserva createReserva(
-        String numeroHabitacion,
-        String cedula,
-        String checkIn,
-        String checkOut,
-        String cantidadPersonas
+    public Reserva createReserva(
+            String numeroHabitacion,
+            String cedula,
+            String checkIn,
+            String checkOut,
+            String cantidadPersonas
     ) {
         Reserva newReserva = new Reserva();
 
