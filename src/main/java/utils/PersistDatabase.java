@@ -42,10 +42,6 @@ public class PersistDatabase {
     }
 
     public <T> List<T> getAll(Class<T> entityClass) {
-//        createConection();
-//        List<T> resultList = ConexionBD.entityManager.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass).getResultList();
-//        commitTransaction();
-//        return resultList;
         createConection();
         CriteriaBuilder cb = ConexionBD.entityManager.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(entityClass);
