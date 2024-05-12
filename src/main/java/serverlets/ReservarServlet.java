@@ -12,7 +12,7 @@ import model.services.ReservaService;
 public class ReservarServlet extends HttpServlet {
     private ReservaService reservaService;
     public void init() {
-        reservaService = new ReservaService();
+        reservaService = new ReservaService(mockPersistDatabase);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -33,12 +33,17 @@ public class ReservarServlet extends HttpServlet {
         reservaService.registrarReserva(newReserva);
     }
 
-    private Reserva createReserva(
-        String numeroHabitacion,
-        String cedula,
-        String checkIn,
-        String checkOut,
-        String cantidadPersonas
+    // En tu clase ReservarServlet
+    public void doPostPublic(HttpServletRequest request, HttpServletResponse response) {
+        doPost(request, response);
+    }
+
+    public Reserva createReserva(
+            String numeroHabitacion,
+            String cedula,
+            String checkIn,
+            String checkOut,
+            String cantidadPersonas
     ) {
         Reserva newReserva = new Reserva();
 

@@ -1,14 +1,14 @@
 package model.services;
 
 import model.entity.Reserva;
-import utils.PersistDatabase;
+import org.example.Hotel_reservas_Demo.util.PersistDatabase;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReservaService {
     private final PersistDatabase persistDatabase;
-    public ReservaService() {
+    public ReservaService(PersistDatabase mockPersistDatabase) {
         persistDatabase = new PersistDatabase();
     }
 

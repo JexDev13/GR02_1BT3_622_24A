@@ -1,4 +1,4 @@
-package utils;
+package org.example.Hotel_reservas_Demo.util;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -50,6 +50,7 @@ public class PersistDatabase {
         commitTransaction();
         return resultList;
     }
+
 
     private void commitTransaction() {
         ConexionBD.transaction.commit();
