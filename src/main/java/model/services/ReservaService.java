@@ -27,7 +27,7 @@ public class ReservaService {
         return filterAvailableRooms(allReservas);
     }
 
-    private List<Reserva> filterAvailableRooms(List<Reserva> allReservas) {
+    public List<Reserva> filterAvailableRooms(List<Reserva> allReservas) {
         return allReservas.stream()
                 .filter(Reserva::getEstaReservado)
                 .collect(Collectors.toList());
