@@ -2,10 +2,9 @@ package serverlets;
 
 import controllers.Reservas.ReservarController;
 
-import entity.ReservaDTO;
+import model.ReservaDTO;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
-import java.io.IOException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

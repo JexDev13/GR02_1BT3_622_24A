@@ -1,4 +1,4 @@
-package entity;
+package utils;
 
 import jakarta.persistence.*;
 public class ConexionBD {

@@ -1,13 +1,8 @@
 
-import entity.Cliente;
-import entity.ConexionBD;
-import entity.Habitacione;
+import model.entity.Cliente;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-
-import java.util.List;
 
 
 public class Main {
@@ -17,26 +12,22 @@ public class Main {
 
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
 
-        try {
+        try (emf; EntityManager em = emf.createEntityManager()) {
 
             System.out.println("ASJGDHJASHDJKU");
 
             // Crear un nuevo objeto Cliente
             Cliente cliente = new Cliente();
-            cliente.setId(192);
+            cliente.setId(2001);
             cliente.setNombre("Juan");
             cliente.setApellidos("Perez");
-
-
 
             em.getTransaction().begin();
 
             em.persist(cliente);
 
             em.getTransaction().commit();
-
 
 
         } catch (Exception e) {
@@ -47,10 +38,7 @@ public class Main {
             System.out.println("ASJGDHJASHDJKU");
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            // Cerrar el EntityManager
-            em.close();
-            emf.close();
         }
+        // Cerrar el EntityManager
     }
 }

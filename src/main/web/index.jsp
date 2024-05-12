@@ -1,4 +1,4 @@
-<%@ page import="entity.Reserva" %>
+<%@ page import="model.entity.Reserva" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

@@ -1,4 +1,4 @@
-package entity;
+package model.entity;
 
 import jakarta.persistence.*;
 
@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Table(name = "reserva")
 public class Reserva {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo", nullable = false)
     private Integer id;
 
@@ -26,6 +27,8 @@ public class Reserva {
     @Column(name = "cantidad_personas")
     private Integer cantidadPersonas;
 
+    @Column(name = "estaReservado")
+    private Boolean estaReservado;
 
     public Integer getId() {
         return id;
@@ -75,4 +78,11 @@ public class Reserva {
         this.cantidadPersonas = cantidadPersonas;
     }
 
+    public Boolean getEstaReservado() {
+        return estaReservado;
+    }
+
+    public void setEstaReservado(Boolean estaReservado) {
+        this.estaReservado = estaReservado;
+    }
 }

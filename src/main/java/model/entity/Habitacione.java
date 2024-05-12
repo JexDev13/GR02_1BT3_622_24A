@@ -1,11 +1,9 @@
-package entity;
+package model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "habitaciones")
@@ -18,7 +16,6 @@ public class Habitacione {
                 ", nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", capacidad=" + capacidad +
-                ", reservas=" + reservas +
                 '}';
     }
 
@@ -35,9 +32,6 @@ public class Habitacione {
 
     @Column(name = "capacidad")
     private Integer capacidad;
-
-    @OneToMany(mappedBy = "numeroHabitacion")
-    private Set<Reserva> reservas = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -70,13 +64,4 @@ public class Habitacione {
     public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
     }
-
-    public Set<Reserva> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(Set<Reserva> reservas) {
-        this.reservas = reservas;
-    }
-
 }

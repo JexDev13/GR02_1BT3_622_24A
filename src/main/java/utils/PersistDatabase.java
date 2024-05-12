@@ -1,7 +1,9 @@
 package utils;
 
-import entity.ConexionBD;
-import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+
+import java.util.List;
 
 public class PersistDatabase {
     public PersistDatabase() {
@@ -33,10 +35,24 @@ public class PersistDatabase {
         }
     }
 
-    private void persistObject(Object object) {
+    private <T> void persistObject(T entityClass) {
         createConection();
-        ConexionBD.entityManager.persist(object);
+        ConexionBD.entityManager.persist(entityClass);
         commitTransaction();
+    }
+
+    public <T> List<T> getAll(Class<T> entityClass) {
+//        createConection();
+//        List<T> resultList = ConexionBD.entityManager.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass).getResultList();
+//        commitTransaction();
+//        return resultList;
+        createConection();
+        CriteriaBuilder cb = ConexionBD.entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> cq = cb.createQuery(entityClass);
+        cq.from(entityClass);
+        List<T> resultList = ConexionBD.entityManager.createQuery(cq).getResultList();
+        commitTransaction();
+        return resultList;
     }
 
     private void commitTransaction() {

@@ -1,10 +1,13 @@
 package controllers.Reservas;
 
-import entity.Reserva;
-import entity.ReservaDTO;
-import utils.PersistDatabase;
+import model.entity.Reserva;
+import model.ReservaDTO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 
-public class ReservarController {
+import java.io.Serializable;
+
+public class ReservarController implements Serializable {
     private final Reserva reserva;
 
     public ReservarController(
@@ -20,7 +23,18 @@ public class ReservarController {
     }
 
     public void reservar() {
-        PersistDatabase persistence = new PersistDatabase();
-        persistence.persist(reserva);
+        EntityManager em;
+
+            em = Persistence.createEntityManagerFactory("default").createEntityManager();
+            em.getTransaction().begin();
+
+            em.persist(reserva);
+
+            em.getTransaction().commit();
+
+        em.close();
+
+//        PersistDatabase persistence = new PersistDatabase();
+//        persistence.persist(reserva);
     }
 }

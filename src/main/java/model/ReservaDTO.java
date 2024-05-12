@@ -1,4 +1,6 @@
-package entity;
+package model;
+
+import model.entity.Reserva;
 
 import java.time.LocalDate;
 
