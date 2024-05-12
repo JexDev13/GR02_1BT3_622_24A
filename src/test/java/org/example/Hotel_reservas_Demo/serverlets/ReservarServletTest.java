@@ -1,12 +1,18 @@
 package org.example.Hotel_reservas_Demo.serverlets;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 import model.entity.Reserva;
 import serverlets.ReservarServlet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class ReservarServletTest {
@@ -47,5 +53,51 @@ class ReservarServletTest {
         assertEquals(mockReserva.getNumeroHabitacion(), result.getNumeroHabitacion());
         assertEquals(mockReserva.getEstaReservado(), result.getEstaReservado());
     }
+
+    @Test
+    void testDoPostWithInvalidRoomNumber() {
+        HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
+
+        // Configura el objeto mock para devolver un número de habitación inválido
+        Mockito.when(mockRequest.getParameter("numeroHabitacion")).thenReturn("invalid");
+
+        // Llama al método doPostPublic y verifica que se lanza una excepción
+        assertThrows(NumberFormatException.class, () -> reservarServlet.doPostPublic(mockRequest, mockResponse));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "101, 12345678, 2022-12-01, 2022-12-05, 2",
+            "102, 87654321, 2022-12-10, 2022-12-15, 3"
+    })
+    void testCreateReserva(String numeroHabitacion, String cedula, String checkIn, String checkOut, String cantidadPersonas) {
+        Reserva result = reservarServlet.createReserva(numeroHabitacion, cedula, checkIn, checkOut, cantidadPersonas);
+
+        assertEquals(Integer.parseInt(numeroHabitacion), result.getNumeroHabitacion());
+        assertEquals(Integer.parseInt(cedula), result.getCedulaCliente());
+        assertEquals(java.time.LocalDate.parse(checkIn), result.getDiaEntrada());
+        assertEquals(java.time.LocalDate.parse(checkOut), result.getDiaSalida());
+        assertEquals(Integer.parseInt(cantidadPersonas), result.getCantidadPersonas());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"101", "102", "invalid"})
+    void testDoPostPublicWithDifferentRoomNumbers(String numeroHabitacion) {
+        HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
+
+        // Configura el objeto mock para devolver el número de habitación proporcionado
+        Mockito.when(mockRequest.getParameter("numeroHabitacion")).thenReturn(numeroHabitacion);
+
+        // Si el número de habitación no es un número válido, se debe lanzar una NumberFormatException
+        if ("invalid".equals(numeroHabitacion)) {
+            assertThrows(NumberFormatException.class, () -> reservarServlet.doPostPublic(mockRequest, mockResponse));
+        } else {
+            // Si el número de habitación es válido, el método debe ejecutarse sin lanzar ninguna excepción
+            reservarServlet.doPostPublic(mockRequest, mockResponse);
+        }
+    }
+
 
 }
