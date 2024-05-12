@@ -1,24 +1,31 @@
 package org.example.Hotel_reservas_Demo.serverlets;
 
+import model.entity.Reserva;
+import model.services.ReservaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import model.entity.Reserva;
 import serverlets.ReservarServlet;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 class ReservarServletTest {
 
     private ReservarServlet reservarServlet;
     private Reserva mockReserva;
+    private ReservaService reservaService;
 
     @BeforeEach
     void setUp() {
         reservarServlet = new ReservarServlet();
         mockReserva = Mockito.mock(Reserva.class);
+        reservaService = new ReservaService();
     }
-
     @Test
     void testCreateReserva() {
         // Configura el objeto mock para devolver valores específicos cuando se llamen sus métodos
@@ -48,4 +55,54 @@ class ReservarServletTest {
     }
 
 
+    @Test
+    public void testPartialFilter() {
+        Reserva reserva1 = Mockito.mock(Reserva.class);
+        Reserva reserva2 = Mockito.mock(Reserva.class);
+        Reserva reserva3 = Mockito.mock(Reserva.class);
+
+        when(reserva1.getEstaReservado()).thenReturn(true);
+        when(reserva2.getEstaReservado()).thenReturn(false);
+        when(reserva3.getEstaReservado()).thenReturn(true);
+
+        List<Reserva> allReservas = Arrays.asList(reserva1, reserva2, reserva3);
+
+        List<Reserva> availableReservas = reservaService.filterAvailableRooms(allReservas);
+
+        assertEquals(2, availableReservas.size());
+        assertTrue(availableReservas.contains(reserva1));
+        assertTrue(availableReservas.contains(reserva3));
+    }
+
+    @Test
+    public void testCompleteFilter() {
+        Reserva reserva1 = Mockito.mock(Reserva.class);
+        Reserva reserva2 = Mockito.mock(Reserva.class);
+
+        when(reserva1.getEstaReservado()).thenReturn(true);
+        when(reserva2.getEstaReservado()).thenReturn(true);
+
+        List<Reserva> allReservas = Arrays.asList(reserva1, reserva2);
+
+        List<Reserva> availableReservas = reservaService.filterAvailableRooms(allReservas);
+
+        assertEquals(2, availableReservas.size());
+        assertTrue(availableReservas.contains(reserva1));
+        assertTrue(availableReservas.contains(reserva2));
+    }
+
+    @Test
+    public void testEmptyFilter() {
+        Reserva reserva1 = Mockito.mock(Reserva.class);
+        Reserva reserva2 = Mockito.mock(Reserva.class);
+
+        when(reserva1.getEstaReservado()).thenReturn(false);
+        when(reserva2.getEstaReservado()).thenReturn(false);
+
+        List<Reserva> allReservas = Arrays.asList(reserva1, reserva2);
+
+        List<Reserva> availableReservas = reservaService.filterAvailableRooms(allReservas);
+
+        assertEquals(0, availableReservas.size());
+    }
 }
