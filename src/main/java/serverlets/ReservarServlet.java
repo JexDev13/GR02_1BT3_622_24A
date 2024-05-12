@@ -1,46 +1,67 @@
 package serverlets;
 
-import controllers.Reservas.ReservarController;
-
-import model.ReservaDTO;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.entity.Reserva;
+import model.services.ReservaService;
 
 
 @WebServlet(name="reservarservlet", urlPatterns = {"/reservar-servlet"})
 public class ReservarServlet extends HttpServlet {
-
+    private ReservaService reservaService;
     public void init() {
+        reservaService = new ReservaService();
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("prueba");
-        // Obtener los parámetros enviados desde el formulario HTML
         String numeroHabitacion = req.getParameter("numeroHabitacion");
         String cedula = req.getParameter("cedula");
         String checkIn = req.getParameter("checkIn");
         String checkOut = req.getParameter("checkOut");
         String cantidadPersonas = req.getParameter("cantidadPersonas");
 
-        ReservaDTO reservaDTO = new ReservaDTO(
-            Integer.parseInt(cedula),
-            Integer.parseInt(numeroHabitacion),
-            checkIn,
-            checkOut,
-            Integer.parseInt(cantidadPersonas)
+        Reserva newReserva = createReserva(
+                numeroHabitacion,
+                cedula,
+                checkIn,
+                checkOut,
+                cantidadPersonas
         );
 
-        reservar(reservaDTO);
+        reservaService.registrarReserva(newReserva);
     }
 
-    private void reservar(
-        ReservaDTO reservaDTO
-    ){
-        ReservarController reservarController = new ReservarController(reservaDTO);
-        reservarController.reservar();
+    private Reserva createReserva(
+        String numeroHabitacion,
+        String cedula,
+        String checkIn,
+        String checkOut,
+        String cantidadPersonas
+    ) {
+        Reserva newReserva = new Reserva();
+
+        newReserva.setCantidadPersonas(
+                Integer.parseInt(cantidadPersonas)
+        );
+        newReserva.setCedulaCliente(
+                Integer.parseInt(cedula)
+        );
+        newReserva.setDiaEntrada(
+                java.time.LocalDate.parse(checkIn)
+        );
+        newReserva.setDiaSalida(
+                java.time.LocalDate.parse(checkOut)
+        );
+        newReserva.setNumeroHabitacion(
+                Integer.parseInt(numeroHabitacion)
+        );
+        newReserva.setEstaReservado(true);
+        return newReserva;
     }
+
+
 
     public void destroy() {
     }
