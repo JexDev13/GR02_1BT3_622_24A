@@ -1,4 +1,4 @@
-package org.example.Hotel_reservas_Demo.util;
+package utils;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

@@ -1,5 +1,6 @@
 package serverlets;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,12 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.entity.Reserva;
 import model.services.ReservaService;
 
+import java.io.IOException;
+import java.util.List;
+
 
 @WebServlet(name="reservarservlet", urlPatterns = {"/reservar-servlet"})
 public class ReservarServlet extends HttpServlet {
     private ReservaService reservaService;
     public void init() {
-        reservaService = new ReservaService(mockPersistDatabase);
+        reservaService = new ReservaService();
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -33,7 +37,13 @@ public class ReservarServlet extends HttpServlet {
         reservaService.registrarReserva(newReserva);
     }
 
-    // En tu clase ReservarServlet
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Reserva> availableRooms = reservaService.getAvailableRooms();
+        System.out.println(availableRooms.size());
+        request.setAttribute("availableRooms", availableRooms);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+
     public void doPostPublic(HttpServletRequest request, HttpServletResponse response) {
         doPost(request, response);
     }

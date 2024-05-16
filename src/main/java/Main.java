@@ -19,7 +19,7 @@ public class Main {
 
             // Crear un nuevo objeto Cliente
             Cliente cliente = new Cliente();
-            cliente.setId(2001);
+            cliente.setId(200);
             cliente.setNombre("Juan");
             cliente.setApellidos("Perez");
 
