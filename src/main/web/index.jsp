@@ -1,5 +1,6 @@
 <%@ page import="model.entity.Reserva" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,42 +63,97 @@
             document.getElementById("cantidadPersonas").value = "";
         }
 
+       window.onload = function() {
+           var habitaciones = document.querySelectorAll('.row .columna');
+           habitaciones.forEach(function(habitacion) {
+               habitacion.style.display = 'none';
+           });
+       };
     </script>
 </head>
 <body>
 <header>
-    <!-- Encabezado de tu página -->
-    <h1 id="titulo">Gran Hotel NewYork</h1>
+    <!-- Encabezado de tu página --<h1 id="titulo">Gran Hotel NewYork</h1>-->
 </header>
 
 <main>
     <!-- Contenido principal de tu página -->
-    <div class="row">
-        <div class="columna">
-            <img src="./img/cuarto_1.avif" alt="Imagen 1">
-            <p>Broadway Suite</p>
-            <p>Habitación: 101</p>
-            <p>Precio($): 150</p>
-            <p>Capacidad: 2</p>
-            <button onclick="mostrarFormulario('Broadway Suite', '101')">Reservar</button>
-        </div>
-        <div class="columna">
-            <img src="./img/cuarto_2.webp" alt="Imagen 2">
-            <p>Wall Street Loft</p>
-            <p>Habitación: 102</p>
-            <p>Precio($): 200</p>
-            <p>Capacidad: 3</p>
-            <button onclick="mostrarFormulario('Wall Street Loft', '102')">Reservar</button>
-        </div>
-        <div class="columna">
-            <img src="./img/cuarto_3.jpg" alt="Imagen 3">
-            <p>Fifth Avenue Penthouse</p>
-            <p>Habitación: 103</p>
-            <p>Precio($): 300</p>
-            <p>Capacidad: 4</p>
-            <button onclick="mostrarFormulario('Fifth Avenue Penthouse', '103')">Reservar</button>
+    <div class="">
+        <img src="./img/Logo_Hotel.png" alt="Img" style="display: block; margin: 0 auto; width: 600px; background-color: #f4f4f4;">
+        <div class="reservation-form">
+            <input type="date" placeholder="Llegada" id="llegada" class="fecha">
+            <input type="date" placeholder="Salida" id="salida" class="fecha">
+            <select id="huespedes">
+                <option value="selected"selected>Seleccione</option>
+                <option value="2">2 Huéspedes</option>
+                <option value="3">3 Huéspedes</option>
+                <option value="4">4 Huéspedes</option>
+            </select>
+            <select id="tipo-habitacion">
+                <option value="selected" selected>Seleccione</option>
+                <option value="individual">Individual</option>
+                <option value="doble">Doble</option>
+                <option value="suite">Suite</option>
+            </select>
+            <button id="reservar-ahora">BUSCAR</button>
+            <button id="reservar-resetear">BORRAR</button>
         </div>
     </div>
+
+
+    </form>
+    <div class="row room-list">
+        <div class="columna individual 2Huesped room-item" >
+            <img src="./img/cuarto_1.avif" alt="Imagen de la Broadway Suite">
+            <div class="room-details">
+                <h3>Broadway Suite</h3>
+                <div class="room-info">
+                    <p>Habitación: 101</p>
+                    <p>Precio: $150 por noche</p>
+                </div>
+                <div class="room-info">
+                    <p>Capacidad: 2 personas</p>
+                    <p>Categoría: Individual</p>
+                </div>
+                <p>Descripción: Disfruta de la elegancia y comodidad en nuestra Broadway Suite, equipada con todas las comodidades modernas, incluyendo WiFi gratuito, televisión por cable y un minibar. Perfecta para viajeros de negocios o una escapada romántica.</p>
+                <button onclick="mostrarFormulario('Broadway Suite', '101')">Reservar</button>
+            </div>
+        </div>
+        <div class="columna doble 3Huesped room-item">
+            <img src="./img/cuarto_2.webp" alt="Imagen de Wall Street Loft">
+            <div class="room-details">
+                <h3>Wall Street Loft</h3>
+                <div class="room-info">
+                    <p>Habitación: 102</p>
+                    <p>Precio: $200 por noche</p>
+                </div>
+                <div class="room-info">
+                    <p>Capacidad: 3 personas</p>
+                    <p>Categoría: Doble</p>
+                </div>
+                <p>Descripción: Experimenta el estilo contemporáneo en nuestro Wall Street Loft. Con un diseño moderno y espacioso, esta habitación ofrece WiFi gratuito, televisión de pantalla plana y un escritorio de trabajo, ideal para familias pequeñas o grupos de amigos.</p>
+                <button onclick="mostrarFormulario('Wall Street Loft', '102')">Reservar</button>
+            </div>
+        </div>
+        <div class="columna suite 4Huesped room-item">
+            <img src="./img/cuarto_3.jpg" alt="Imagen de Fifth Avenue Penthouse">
+            <div class="room-details">
+                <h3>Fifth Avenue Penthouse</h3>
+                <div class="room-info">
+                    <p>Habitación: 103</p>
+                    <p>Precio: $300 por noche</p>
+                </div>
+                <div class="room-info">
+                    <p>Capacidad: 4 personas</p>
+                    <p>Categoría: Suite</p>
+                </div>
+                <p>Descripción: Vive el lujo en nuestro Fifth Avenue Penthouse. Esta suite cuenta con espacios amplios, decoración elegante, y vistas impresionantes de la ciudad. Incluye WiFi gratuito, una cocina completamente equipada y un baño de lujo, perfecto para familias grandes o estancias prolongadas.</p>
+                <button onclick="mostrarFormulario('Fifth Avenue Penthouse', '103')">Reservar</button>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Formulario oculto para reservar habitación -->
     <div id="formulario" style="display: none;">
@@ -134,6 +190,47 @@
 
 
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('reservar-ahora').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var llegada = document.getElementById('llegada').value;
+            var salida = document.getElementById('salida').value;
+            var huespedes = document.getElementById('huespedes').value;
+            var tipoHabitacion = document.getElementById('tipo-habitacion').value;
+
+            var habitaciones = document.querySelectorAll('.row .columna');
+            habitaciones.forEach(function(habitacion) {
+                var esTipoCorrecto = tipoHabitacion !== 'selected' ? habitacion.classList.contains(tipoHabitacion) : false;
+                var esHuespedesCorrecto = huespedes !== 'selected' ? habitacion.classList.contains(huespedes + 'Huesped') : false;
+                if ((esTipoCorrecto && esHuespedesCorrecto) || (tipoHabitacion === 'selected' && esHuespedesCorrecto) || (huespedes === 'selected' && esTipoCorrecto) || (tipoHabitacion === 'selected' && huespedes === 'selected')) {
+                    habitacion.style.display = 'block';
+                } else {
+                    habitacion.style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById('reservar-resetear').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // Restablecer los valores de los campos de búsqueda
+            document.getElementById('llegada').value = '';
+            document.getElementById('salida').value = '';
+            document.getElementById('huespedes').value = 'selected';
+            document.getElementById('tipo-habitacion').value = 'selected';
+
+            // Ocultar todas las habitaciones
+            var habitaciones = document.querySelectorAll('.row .columna');
+            habitaciones.forEach(function(habitacion) {
+                habitacion.style.display = 'none';
+            });
+        });
+
+    });
+</script>
 
 </body>
 </html>

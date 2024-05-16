@@ -16,6 +16,7 @@ public class Habitacione {
                 ", nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", capacidad=" + capacidad +
+                ", descripcion=" + categoria +
                 '}';
     }
 
@@ -32,6 +33,9 @@ public class Habitacione {
 
     @Column(name = "capacidad")
     private Integer capacidad;
+
+    @Column(name = "categoria")
+    private String categoria;
 
     public Integer getId() {
         return id;
@@ -64,4 +68,10 @@ public class Habitacione {
     public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
     }
+
+    public String getCategoria() {return categoria;}
+
+    public void setCategoria(String descripcion) {this.categoria = descripcion;}
+
 }
+

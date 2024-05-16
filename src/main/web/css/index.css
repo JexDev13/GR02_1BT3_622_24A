@@ -1,27 +1,24 @@
 /* Estilos para el título */
 #titulo {
+    top: 0;
+    width: 100%;
     text-align: center;
     font-size: 36px;
     font-weight: bold;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; /* Fuente similar a Cheltenham */
-    margin-top: 50px; /* Ajusta el margen superior según sea necesario */
-    margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
 
-.row {
-    display: flex;
-    justify-content: space-around;
-}
 
 .columna {
-    flex: 0 0 30%; /* Ocupa el 30% del espacio disponible */
-    text-align: center;
+    flex: 0 0 25%; /* Ocupa el 30% del espacio disponible */
     margin: 20px;
 }
 
 .columna img {
     max-width: 100%;
-    max-height: 250px; /* Ajusta la altura máxima según tus necesidades */
+    max-height: 250px;
     width: auto;
     height: auto;
 }
@@ -54,9 +51,6 @@ button {
     color: white; /* Texto blanco */
 }
 
-form {
-    margin-top: 20px;
-}
 
 form label, form input {
     display: block;
@@ -65,14 +59,11 @@ form label, form input {
 }
 
 form input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    width: 50%; /* Ancho del botón */
-    margin-top: 20px; /* Espacio superior */
+    transition: background-color 0.3s ease;
 }
 
 #formulario {
@@ -100,3 +91,138 @@ form input[type="submit"] {
 }
 
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.container {
+    display: inline-flex;
+    width: 100%;
+    margin: 10px auto;
+}
+
+.reservation-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 10px;
+}
+
+.reservation-form input[type="date"],
+.reservation-form select,
+.reservation-form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.reservation-form button . {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reservation-form button:hover {
+    background-color: #0056b3;
+}
+
+#llegada, #salida  {
+    font-size: 16px; /* Aumenta el tamaño del texto */
+    width: 200px; /* Aumenta el ancho del elemento */
+    height: 50px; /* Aumenta la altura del elemento */
+}
+
+
+
+/* Estilos para la lista de habitaciones */
+.room-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+    max-height: 80vh; /* Ajusta este valor según tus necesidades */
+}
+
+.room-item {
+    display: flex;
+    flex-direction: row; /* Cambiado de column a row */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.row{
+    display: flex;
+
+}
+.room-item img {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+}
+
+.room-details {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.room-details h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.room-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+
+}
+
+.room-details button {
+    align-self: start;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.room-details button:hover {
+    background-color: #0056b3;
+}
+
+/* Nuevo CSS para alinear elementos en la misma línea */
+.room-info {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px; /* Añade un poco de espacio entre los elementos */
+    text-align: left;
+}
+
+.room-info p {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+}
+
+
+div {
+    display: inline;
+}
