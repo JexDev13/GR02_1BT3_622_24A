@@ -76,8 +76,6 @@ public class ReservarServlet extends HttpServlet {
         return newReserva;
     }
 
-
-
     public void destroy() {
     }
 }

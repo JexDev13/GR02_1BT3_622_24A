@@ -6,8 +6,7 @@
     <title>Hotel NewYork - Reservas</title>
     <link rel="stylesheet" href="./css/index.css"> <!-- Enlazar el archivo CSS externo -->
     <script>
-        // Función para mostrar el formulario cuando se presiona el botón "Reservar"
-        function mostrarFormulario(nombreHabitacion, numeroHabitacion) {
+       function mostrarFormulario(nombreHabitacion, numeroHabitacion) {
             // Obtener el formulario y el párrafo para mostrar el nombre y número de la habitación
             var formulario = document.getElementById("formulario");
             var nombreHabitacionElemento = document.getElementById("nombreHabitacion");
@@ -20,6 +19,36 @@
 
             // Mostrar el formulario
             formulario.style.display = "block";
+        }
+
+        function validarFormulario() {
+            var checkIn = document.getElementById("checkIn");
+            var checkOut = document.getElementById("checkOut");
+            var cedula = document.getElementById("cedula");
+
+            // Obtener la fecha actual
+            var fechaActual = new Date();
+            fechaActual.setHours(0, 0, 0, 0); // Asegurarse de que la hora sea 00:00:00
+
+            // Validar que el checkIn no sea anterior a la fecha actual
+            if (new Date(checkIn.value) < fechaActual) {
+                alert("La fecha de entrada no puede ser anterior a la fecha actual.");
+                return false;
+            }
+
+            // Validar que el checkOut no sea menor o igual al checkIn
+            if (new Date(checkOut.value) <= new Date(checkIn.value)) {
+                alert("La fecha de salida no puede ser menor o igual a la fecha de entrada.");
+                return false;
+            }
+
+            // Validar que la cédula solo contenga números
+            if (!/^\d+$/.test(cedula.value)) {
+                alert("Cédula es Invalida.");
+                return false;
+            }
+
+            return true;
         }
 
         function cerrarFormulario() {
@@ -76,7 +105,7 @@
         <h2>Reservar Habitacion</h2>
 
 
-        <form action="reservar-servlet" method="POST"> <!-- Cambiado a ReservaServlet y método POST -->
+        <form action="reservar-servlet" method="POST" onsubmit="return validarFormulario();">
 
             <p>Nombre de la habitacion: <span id="nombreHabitacion"></span></p>
             <p>Numero de la habitación: <span id="numeroHabitacion"></span></p>
@@ -102,7 +131,6 @@
         </form>
 
     </div>
-
 
 
 </main>
