@@ -1,14 +1,4 @@
-/* Estilos para el título */
-#titulo {
-    top: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    margin-top: 50px;
-    margin-bottom: 20px;
-}
+
 
 
 .columna {
@@ -41,54 +31,6 @@ button {
     border-radius: 5px;
 }
 
-#formulario h2 {
-    font-size: 36px; /* Tamaño de letra más grande */
-    color: white; /* Texto blanco */
-}
-
-#formulario p {
-    font-size: 18px; /* Tamaño de letra más pequeño */
-    color: white; /* Texto blanco */
-}
-
-
-form label, form input {
-    display: block;
-    margin: 10px auto; /* Centrar horizontalmente */
-    width: 50%; /* Ancho de los campos de entrada */
-}
-
-form input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#formulario {
-    position: relative; /* Permitir el posicionamiento absoluto del botón */
-    background-color: rgba(0, 0, 0, 0.5); /* Negro con opacidad */
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 30%; /* Ancho del formulario */
-    margin: auto; /* Centrar horizontalmente */
-}
-
-#cerrarFormulario {
-    position: absolute; /* Posicionamiento absoluto */
-    top: 10px; /* Distancia desde la parte superior */
-    right: 10px; /* Distancia desde la derecha */
-    background-color: #e09797; /* Color de fondo rojo */
-    color: white; /* Color del texto blanco */
-    border: none;
-    border-radius: 10%; /* Botón circular */
-    width: 45px; /* Ancho del botón */
-    height: 35px; /* Altura del botón */
-    font-size: 16px; /* Tamaño del texto */
-    cursor: pointer;
-}
 
 
 body {
@@ -143,17 +85,18 @@ body {
 }
 
 
-
-/* Estilos para la lista de habitaciones */
 .room-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical */
     max-height: 80vh; /* Ajusta este valor según tus necesidades */
+    overflow-x: hidden; /* Esconde la barra de desplazamiento horizontal */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho disponible */
 }
 
+/* Asegúrate de que los elementos se dispongan en una fila */
 .room-item {
     display: flex;
     flex-direction: row; /* Cambiado de column a row */
@@ -161,38 +104,40 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    width: 100%; /* Asegúrate de que ocupe todo el ancho disponible */
 }
 
-.row{
-    display: flex;
-
-}
+/* Ajusta el tamaño de la imagen */
 .room-item img {
     width: 200px;
     height: auto;
     object-fit: cover;
 }
 
+/* Detalles de la habitación */
 .room-details {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    width: calc(100% - 220px); /* Resta el ancho de la imagen más un margen */
 }
 
+/* Estilos de encabezado */
 .room-details h3 {
     margin: 0;
     font-size: 24px;
     color: #333;
 }
 
+/* Estilos de párrafos */
 .room-details p {
     margin: 5px 0;
     font-size: 16px;
     color: #666;
-
 }
 
+/* Estilo para el botón de reservar */
 .room-details button {
     align-self: start;
     padding: 10px 20px;
@@ -208,7 +153,7 @@ body {
     background-color: #0056b3;
 }
 
-/* Nuevo CSS para alinear elementos en la misma línea */
+/* Estilo para la información de la habitación */
 .room-info {
     display: flex;
     justify-content: flex-start;
@@ -223,6 +168,99 @@ body {
 }
 
 
-div {
-    display: inline;
+#formulario {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    width: 60%;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+#formulario h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#formulario p {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    flex: 1;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-group input {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.form-group:nth-child(odd) {
+    margin-right: 10px;
+}
+
+.form-group:nth-child(even) {
+    margin-left: 10px;
+}
+
+#formulario input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#formulario input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#cerrarFormulario {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e09797;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group {
+    width: 48%;
+}
+

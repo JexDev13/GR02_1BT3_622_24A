@@ -16,13 +16,14 @@ public class ReservaService {
         persistDatabase = new PersistDatabase();
     }
 
-    public void registrarReserva(Reserva reserva) {
+    public boolean registrarReserva(Reserva reserva) {
         int result = persistDatabase.persist(reserva);
         if (result == 0) {
             System.out.println("Reserva registrada con éxito");
         } else {
             System.out.println("Error al registrar la reserva");
         }
+        return false;
     }
 
     public List<Reserva> getAvailableRooms() {

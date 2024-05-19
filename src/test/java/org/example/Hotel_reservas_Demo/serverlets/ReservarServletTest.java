@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 import model.entity.Reserva;
 import serverlets.ReservarServlet;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -83,7 +85,7 @@ class ReservarServletTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"101", "102", "invalid"})
-    void testDoPostPublicWithDifferentRoomNumbers(String numeroHabitacion) {
+    void testDoPostPublicWithDifferentRoomNumbers(String numeroHabitacion) throws IOException {
         HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
 
